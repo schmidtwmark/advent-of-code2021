@@ -9,6 +9,6 @@ fn main() {
     };
 
     let contents = fs::read_to_string(filename)
-        .expect(&format!("Something went wrong reading the file {}", filename));
-    let input_lines = contents.split("\n");
+        .unwrap_or_else(|_| panic!("Something went wrong reading the file {}", filename));
+    let mut input_lines = contents.split('\n');
 }

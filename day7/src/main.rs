@@ -9,12 +9,12 @@ fn main() {
     };
 
     let contents = fs::read_to_string(filename)
-        .expect(&format!("Something went wrong reading the file {}", filename));
-    let mut input_lines = contents.split("\n");
+        .unwrap_or_else(|_| panic!("Something went wrong reading the file {}", filename));
+    let mut input_lines = contents.split('\n');
 
     let mut nums: Vec<i32> = input_lines.next().unwrap().split(',').map(|s| s.parse().unwrap()).collect();
     // println!("nums: {:?}", nums);
-    nums.sort();
+    nums.sort_unstable();
 
     let count = nums.len();
     let mid = count / 2;
