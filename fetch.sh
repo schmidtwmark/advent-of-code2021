@@ -19,3 +19,4 @@ cd day$1
 curl $URL --cookie "session=$AOC_SESSION" -s > input.txt
 touch sample.txt
 cp ../template.rs src/main.rs
+echo "itertools = \"0.8.0\"" >> Cargo.toml

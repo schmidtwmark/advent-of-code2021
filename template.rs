@@ -1,5 +1,6 @@
 
 use std::{env, fs};
+use itertools::Itertools;
 
 fn main() {
     let (filename, _sample_param)= if env::args().nth(1).map_or(false, |s| s == "-s") {
