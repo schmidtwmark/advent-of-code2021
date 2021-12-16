@@ -67,7 +67,7 @@ fn read_subpackets(bits: &mut &str) -> Vec<Packet>{
 
 impl Packet{
     fn from_binary(binary: &str) -> (Packet, &str){
-        let mut bits = &binary[..];
+        let mut bits = binary;
         let version= read_bytes_and_incremenent(&mut bits, 3) as u8;
         println!("Version is {}", version);
         let type_id = read_bytes_and_incremenent(&mut bits, 3);
@@ -117,7 +117,7 @@ impl Packet{
         (packet, bits)
     }
 
-    fn version_sum(self: &Self) -> usize {
+    fn version_sum(&self) -> usize {
         let version = self.version as usize;
         match &self.packet_type {
             PacketType::Literal(_) => version,
@@ -132,7 +132,7 @@ impl Packet{
         }
     }
 
-    fn process(self: &Self) -> usize {
+    fn process(&self) -> usize {
         match &self.packet_type {
             PacketType::Literal(value) => *value,
             PacketType::Sum(subpackets) => subpackets.iter().fold(0, |acc, p| acc + p.process()),
