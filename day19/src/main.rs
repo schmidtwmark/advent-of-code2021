@@ -118,8 +118,11 @@ fn main() {
 
     while distances.len() < map.len() {
         for (scanner, beacons) in map.iter() {
-            if let Some(dist) = get_known_beacons(&mut known_beacons, beacons) {
-                *distances.entry(*scanner).or_default() = dist;
+            if !distances.contains_key(scanner) {
+                if let Some(dist) = get_known_beacons(&mut known_beacons, beacons) {
+                    *distances.entry(*scanner).or_default() = dist;
+                }
+
             }
         }
     }
